@@ -14,4 +14,4 @@ outputs:
     description: 'Success to send webhook message'
 runs:
   using: 'node20'
-  main: 'src/index.js'
+  main: 'dist/index.js'
