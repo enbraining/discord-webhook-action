@@ -25555,6 +25555,61 @@ module.exports = {
 
 /***/ }),
 
+/***/ 8305:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const core_1 = __nccwpck_require__(4829);
+const ky_1 = __importDefault(__nccwpck_require__(6586));
+const types_1 = __nccwpck_require__(4676);
+const utils_1 = __nccwpck_require__(4504);
+function getEmbed() {
+    const title = (0, core_1.getInput)("title");
+    const description = (0, core_1.getInput)("description");
+    const url = (0, core_1.getInput)("url");
+    const embed = {};
+    if (title) {
+        embed['title'] = title;
+    }
+    if (description) {
+        embed['description'] = description;
+    }
+    if (url) {
+        embed['url'] = url;
+    }
+    return embed;
+}
+async function main() {
+    (0, core_1.debug)("Loading input parameter.");
+    const webhookUrl = (0, core_1.getInput)("webhook-url");
+    const type = (0, utils_1.getType)((0, core_1.getInput)("type"));
+    const username = (0, core_1.getInput)("username");
+    const content = (0, core_1.getInput)("content");
+    (0, core_1.debug)("Send webhook message.");
+    const action = {
+        content: content,
+    };
+    if (username) {
+        action.username = username;
+    }
+    if (type === types_1.Type.CONTENT) {
+        action['content'] = content;
+    }
+    else if (type === types_1.Type.EMBEDS) {
+        const embed = getEmbed();
+        action['embeds'] = [embed];
+    }
+    await ky_1.default.post(webhookUrl, { json: action });
+}
+main();
+
+
+/***/ }),
+
 /***/ 4676:
 /***/ ((__unused_webpack_module, exports) => {
 
@@ -28065,57 +28120,9 @@ const ky = createInstance();
 /******/ if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = new URL('.', import.meta.url).pathname.slice(import.meta.url.match(/^file:\/\/\/\w:/) ? 1 : 0, -1) + "/";
 /******/ 
 /************************************************************************/
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it uses a non-standard name for the exports (exports).
-(() => {
-var exports = __webpack_exports__;
-
-Object.defineProperty(exports, "B", ({ value: true }));
-const core_1 = __nccwpck_require__(4829);
-const ky_1 = __nccwpck_require__(6586);
-const types_1 = __nccwpck_require__(4676);
-const utils_1 = __nccwpck_require__(4504);
-function getEmbed() {
-    const title = core_1.default.getInput("title");
-    const description = core_1.default.getInput("description");
-    const url = core_1.default.getInput("url");
-    const embed = {};
-    if (title) {
-        embed['title'] = title;
-    }
-    if (description) {
-        embed['description'] = description;
-    }
-    if (url) {
-        embed['url'] = url;
-    }
-    return embed;
-}
-async function main() {
-    (0, core_1.debug)("Loading input parameter.");
-    const webhookUrl = core_1.default.getInput("webhook-url");
-    const username = core_1.default.getInput("username");
-    const content = core_1.default.getInput("content");
-    const type = (0, utils_1.getType)(core_1.default.getInput("type"));
-    (0, core_1.debug)("Send webhook message.");
-    const action = {
-        content: content,
-    };
-    if (username) {
-        action.username = username;
-    }
-    if (type === types_1.Type.CONTENT) {
-        action['content'] = content;
-    }
-    else if (type === types_1.Type.EMBEDS) {
-        const embed = getEmbed();
-        action['embeds'] = [embed];
-    }
-    await ky_1.default.post(webhookUrl, { json: action });
-}
-main();
-
-})();
-
-var __webpack_exports___esModule = __webpack_exports__.B;
-export { __webpack_exports___esModule as __esModule };
+/******/ 
+/******/ // startup
+/******/ // Load entry module and return exports
+/******/ // This entry module is referenced by other modules so it can't be inlined
+/******/ var __webpack_exports__ = __nccwpck_require__(8305);
+/******/ 

@@ -1,12 +1,12 @@
-import core, { debug } from '@actions/core'
+import { getInput, debug} from '@actions/core'
 import ky from 'ky'
 import { Action, Embed, Type } from './types'
 import { getType } from './utils'
 
 function getEmbed(): Partial<Embed> {
-    const title = core.getInput("title")
-    const description = core.getInput("description")
-    const url = core.getInput("url")
+    const title = getInput("title")
+    const description = getInput("description")
+    const url = getInput("url")
 
     const embed: Partial<Embed> = {}
 
@@ -28,10 +28,10 @@ function getEmbed(): Partial<Embed> {
 async function main(){
     debug("Loading input parameter.")
 
-    const webhookUrl = core.getInput("webhook-url")
-    const username = core.getInput("username")
-    const content = core.getInput("content")
-    const type = getType(core.getInput("type"))
+    const webhookUrl = getInput("webhook-url")
+    const type = getType(getInput("type"))
+    const username = getInput("username")
+    const content = getInput("content")
     
     debug("Send webhook message.")
 
