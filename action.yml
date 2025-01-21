@@ -1,4 +1,4 @@
-name: 'Discord Webhook Action'
+name: 'A Discord Webhook Action'
 description: 'Send discord webhook message'
 inputs:
   webhook-url:
