@@ -25567,43 +25567,37 @@ const core_1 = __nccwpck_require__(4829);
 const ky_1 = __importDefault(__nccwpck_require__(6586));
 const types_1 = __nccwpck_require__(4676);
 const utils_1 = __nccwpck_require__(4504);
-function getEmbed() {
-    const title = (0, core_1.getInput)("title");
-    const description = (0, core_1.getInput)("description");
-    const url = (0, core_1.getInput)("url");
-    const embed = {};
-    if (title) {
-        embed['title'] = title;
-    }
-    if (description) {
-        embed['description'] = description;
-    }
-    if (url) {
-        embed['url'] = url;
-    }
+function getEmbed(config) {
+    const embed = {
+        title: config.title,
+        description: config.description,
+        url: config.embedUrl,
+        color: config.color,
+        image: config.imageUrl ? { url: config.imageUrl } : undefined,
+    };
     return embed;
 }
 async function main() {
-    (0, core_1.debug)("Loading input parameter.");
-    const webhookUrl = (0, core_1.getInput)("webhook-url");
-    const type = (0, utils_1.getType)((0, core_1.getInput)("type"));
-    const username = (0, core_1.getInput)("username");
-    const content = (0, core_1.getInput)("content");
+    const config = (0, utils_1.getConfig)();
+    const action = {};
+    if (config.username) {
+        action.username = config.username;
+    }
+    switch (config.type) {
+        case types_1.Type.CONTENT:
+            {
+                action['content'] = config.content;
+            }
+            ;
+        case types_1.Type.EMBEDS:
+            {
+                const embed = getEmbed(config);
+                action['embeds'] = [embed];
+            }
+            ;
+    }
     (0, core_1.debug)("Send webhook message.");
-    const action = {
-        content: content,
-    };
-    if (username) {
-        action.username = username;
-    }
-    if (type === types_1.Type.CONTENT) {
-        action['content'] = content;
-    }
-    else if (type === types_1.Type.EMBEDS) {
-        const embed = getEmbed();
-        action['embeds'] = [embed];
-    }
-    await ky_1.default.post(webhookUrl, { json: action });
+    await ky_1.default.post(config.webhookUrl, { json: action });
 }
 main();
 
@@ -25633,12 +25627,27 @@ var Type;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getType = getType;
+exports.getConfig = getConfig;
+const core_1 = __nccwpck_require__(4829);
 const types_1 = __nccwpck_require__(4676);
 function getType(value) {
     if (Object.values(types_1.Type).includes(value)) {
         return value;
     }
     return types_1.Type.CONTENT;
+}
+function getConfig() {
+    return {
+        webhookUrl: (0, core_1.getInput)("webhook-url"),
+        type: getType((0, core_1.getInput)("type")) || undefined,
+        username: (0, core_1.getInput)("username") || undefined,
+        content: (0, core_1.getInput)("content") || undefined,
+        title: (0, core_1.getInput)("title") || undefined,
+        embedUrl: (0, core_1.getInput)("embed-url") || undefined,
+        color: (0, core_1.getInput)("color") || undefined,
+        imageUrl: (0, core_1.getInput)("image-url") || undefined,
+        description: (0, core_1.getInput)("description") || undefined,
+    };
 }
 
 
