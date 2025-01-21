@@ -1,0 +1,17 @@
+name: 'Discord Webhook Action'
+description: 'Send discord webhook message'
+inputs:
+  webhook-url:
+    description: 'Discord webhook url'
+    required: true
+  content:
+    description: "A message to send"
+  username:
+    description: "A username to send"
+
+outputs:
+  result:
+    description: 'Success to send webhook message'
+runs:
+  using: 'node20'
+  main: 'src/index.js'
