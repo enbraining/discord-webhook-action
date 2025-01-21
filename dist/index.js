@@ -28000,13 +28000,13 @@ async function main(){
 
     const webhookUrl = core.getInput("webhook-url")
     const username = core.getInput("username")
-    const content = core.getInput("message")
+    const content = core.getInput("content")
 
     ;(0,core.debug)("Send webhook message.")
 
     const body = {
         username: username,
-        content: content
+        content: content,
     }
 
     await distribution.post(webhookUrl, { json: body })
