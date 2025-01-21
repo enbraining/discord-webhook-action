@@ -6,7 +6,7 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "ncc build src/index.js"
+        "build": "ncc build src/index.ts"
     },
     "keywords": [],
     "author": "",
@@ -15,5 +15,8 @@
         "@actions/core": "^1.11.1",
         "@actions/github": "^6.0.0",
         "ky": "^1.7.4"
+    },
+    "devDependencies": {
+        "typescript": "^5.7.3"
     }
 }
