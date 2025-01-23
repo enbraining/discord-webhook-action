@@ -1,8 +1,11 @@
-name: 'A Discord Webhook Action'
-description: 'Send discord webhook message'
+name: "A Discord Webhook Action"
+description: "Send discord webhook message"
+branding:
+  icon: "send"
+  color: "blue"
 inputs:
   webhook-url:
-    description: 'Discord webhook url'
+    description: "Discord webhook url"
     required: true
   type:
     description: "A type of webhook"
@@ -31,8 +34,8 @@ inputs:
 
 outputs:
   result:
-    description: 'Success to send webhook message'
+    description: "Success to send webhook message"
 
 runs:
-  using: 'node20'
-  main: 'dist/index.js'
+  using: "node20"
+  main: "dist/index.js"
