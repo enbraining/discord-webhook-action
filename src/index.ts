@@ -26,23 +26,27 @@ async function main() {
   switch (config.type) {
     case Type.CONTENT: {
       action["content"] = config.content;
+      break;
     }
 
     case Type.EMBED: {
       const embed = getEmbed(config);
       action["embeds"] = [embed];
+      break;
     }
 
     case Type.FILE: {
       error("It's not implemented yet.");
+      break;
     }
 
     case Type.POLL: {
       error("It's not implemented yet.");
+      break;
     }
   }
 
-  debug("Send webhook message.");
+  info("Send webhook message.");
 
   await ky
     .post(config.webhookUrl, {
