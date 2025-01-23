@@ -30,7 +30,7 @@ uses: enbraining/discord-webhook-action@v0.0.4-alpha
 with:
   webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
   username: "Github Action"
-  type: EMBEDS
+  type: EMBED
   title: "This is title"
   description: "This is message"
   image-url: "https://example.com/image.jpg"
