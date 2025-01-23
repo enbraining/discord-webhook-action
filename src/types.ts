@@ -9,7 +9,7 @@ export interface Embed {
   description?: string;
   url?: string;
   image?: Image;
-  color?: string;
+  color?: number;
 }
 
 export interface Image {
@@ -31,6 +31,6 @@ export interface Config {
   title: string | undefined;
   embedUrl: string | undefined;
   description: string | undefined;
-  color: string | undefined;
+  color: number | undefined;
   imageUrl: string | undefined;
 }
