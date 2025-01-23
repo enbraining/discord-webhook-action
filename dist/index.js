@@ -25586,19 +25586,23 @@ async function main() {
     switch (config.type) {
         case types_1.Type.CONTENT: {
             action["content"] = config.content;
+            break;
         }
         case types_1.Type.EMBED: {
             const embed = getEmbed(config);
             action["embeds"] = [embed];
+            break;
         }
         case types_1.Type.FILE: {
             (0, core_1.error)("It's not implemented yet.");
+            break;
         }
         case types_1.Type.POLL: {
             (0, core_1.error)("It's not implemented yet.");
+            break;
         }
     }
-    (0, core_1.debug)("Send webhook message.");
+    (0, core_1.info)("Send webhook message.");
     await ky_1.default
         .post(config.webhookUrl, {
         json: action,
@@ -25652,7 +25656,7 @@ function getConfig() {
         content: (0, core_1.getInput)("content") || undefined,
         title: (0, core_1.getInput)("title") || undefined,
         embedUrl: (0, core_1.getInput)("embed-url") || undefined,
-        color: parseInt((0, core_1.getInput)("color"), 16).toString() || undefined,
+        color: parseInt((0, core_1.getInput)("color"), 16) || undefined,
         imageUrl: (0, core_1.getInput)("image-url") || undefined,
         description: (0, core_1.getInput)("description") || undefined,
     };
